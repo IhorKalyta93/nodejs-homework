@@ -7,7 +7,6 @@ const { v4 } = require('uuid');
 const { User } = require('../models');
 const { HttpError } = require('../utils');
 const { sendEmail } = require('../utils');
-
 const { JWT_SECRET, JWT_EXPIRES } = process.env;
 
 const avatarsPath = path.join(__dirname, '../', 'public', 'avatars');
@@ -21,7 +20,6 @@ const register = async (req, res) => {
   const avatarURL = gravatar.url(email, { s: '250', d: 'identicon' });
   const verificationToken = v4();
   const newUser = new User({ email, subscription, avatarURL, verificationToken });
-
   newUser.setPassword(password);
   await newUser.save();
 
